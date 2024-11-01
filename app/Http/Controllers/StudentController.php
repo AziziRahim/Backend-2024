@@ -43,57 +43,69 @@ class StudentController extends Controller
     public function update(Request $request, $id){
         $student = Student::find($id);
 
-        if(!$student) {
-            $data =[
-                "msg"=> "Student not found",
-            ];
-
-            return response()->json($data, 404);
-        }
-
+        if($student) {
+           
         $input = [
             'nama' => $request->nama ?? $student->nama,
             'nim' => $request->nim  ?? $student->nim,
             'email' => $request->email ?? $student->email,
-            'jurusan' => $request->jurusan ?? $student->jurusan,
+            'jurusan' => $request->jurusan ?? $student->jurusan
         ];
 
         $student->update($input);
 
         $data = [
             'msg'=> 'Student is Updated',
-            'data'=> $student,
+            'data'=> $student
         ];
         return response()->json($data, 200);
+    }
+    else {
+        $data = [
+            "msg"=> "Student not found"
+        ];
+
+        return response()->json($data, 404);
+    }
 
 }
     public function destroy($id){
         $student = Student::find($id);
 
-        if(!$student) {
-            $data =[
-                "msg"=> "Student not found",
-            ];
+        if($student) {
 
-            return response()->json($data, 404);
-        }
-        
-        $student = Student::destroy($id);
-        
-        $delete = [$id];
+        $student->delete();
 
         $data = [
-            'msg'=> 'Student is delete',
-            'data'=> $student,
+            'msg'=> 'Student is Updated'
         ];
-
-        $students = Student::all();
-
-        $data = [
-            "msg" => "Get All Students",
-            "data" => $students,
-        ];
-
         return response()->json($data, 200);
+    }
+    else {
+        $data = [
+            "msg"=> "Student not found"
+        ];
+
+        return response()->json($data, 404);
+    }
+}
+
+    public function show($id){
+    $student = Student::find($id);
+
+    if ($student) {
+        $data = [
+            "msg"=> "Get Detail Student",
+            "data"=> $student,
+        ];
+        return response()->json($data, 200);
+    }
+    else {
+        $data = [
+            "msg" => "Student not found",
+        ];
+        return response()->json($data, 404);
+    }
+
 }
 }
