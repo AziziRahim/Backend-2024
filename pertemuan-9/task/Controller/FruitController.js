@@ -14,7 +14,7 @@ const fruits = require("../data/fruits");
  *
  * @hint - Gunakan looping for of
  */
-function index() {
+const index = () => {
     for (const fruit of fruits) {
         console.log(fruit);
     }
@@ -31,7 +31,7 @@ function index() {
  *
  * @hint - Gunakan method push
  */
-function store(name) {
+const store = (name) => {
     fruits.push(name);
     index();
 };
@@ -45,7 +45,7 @@ function store(name) {
  * @param {number} position - Posisi atau index yang ingin diupdate.
  * @param {string} name - Nama buah yang baru.
  */
-function update(position, name) {
+const update = (position, name) => {
     fruits[position] = name;
     index();
 };
@@ -60,7 +60,7 @@ function update(position, name) {
  *
  * @hint - Gunakan method splice
  */
-function destroy(position) {
+const destroy = (position) => {
     fruits.splice(position, 1);
     index();
 };
